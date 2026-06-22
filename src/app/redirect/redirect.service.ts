@@ -68,9 +68,7 @@ export class RedirectService implements CanActivate {
     // Extracts the target from the extras
     const target = extras && extras.target;
     // Compose the url link for redirection
-    const link = '/redirect?url=' + encodeURIComponent(url) + (target ? '&=' + target : '');
-    // Navigates with the router activat the redirection guard
-    return this.router.navigateByUrl(link, extras);
+    return this.jump(url, target);
   }
 
   /** Navigates to the given url, redirecting when necessary

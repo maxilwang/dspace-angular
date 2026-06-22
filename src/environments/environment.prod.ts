@@ -16,4 +16,9 @@ export const environment = {
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/server',
   },
+  // CRIS specific configurations
+  cris: {
+    enabled: true,
+          // Add CRIS-specific configurations here
+  },
 };

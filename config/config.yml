@@ -1,5 +1,27 @@
 rest:
-  ssl: true
-  host: dspacecris7.4science.cloud
+  ssl: true 
+  host: etd.cput.ac.za
   port: 443
   nameSpace: /server
+ui:
+  ssl: false
+  host: localhost  
+  port: 4000
+  nameSpace: /   
+  homePage:
+    topItems:
+      - discoveryConfigurationName: homePageTopItems
+        sortField: dc.date.accessioned
+        order: DESC
+        titleKey: home.top-items.recent
+        numberOfItems: 5
+      - discoveryConfigurationName: homePageTopItems
+        sortField: metric.view
+        order: DESC
+        titleKey: home.top-items.most-viewed
+        numberOfItems: 5
+      - discoveryConfigurationName: homePageTopItems  # ADD THIS BLOCK
+        sortField: metric.download
+        order: DESC
+        titleKey: home.top-items.most-downloaded
+        numberOfItems: 5    

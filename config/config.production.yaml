@@ -1,0 +1,10 @@
+rest:
+  ssl: true
+  host: etd.cput.ac.za
+  port: 443
+  nameSpace: /server
+ui:
+  ssl: false
+  host: 0.0.0.0
+  port: 4000
+  nameSpace: /
