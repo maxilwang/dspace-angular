@@ -242,5 +242,9 @@
     "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "volta": {
+    "node": "20.20.2",
+    "yarn": "1.22.22"
   }
 }
