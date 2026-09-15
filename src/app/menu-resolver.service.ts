@@ -186,77 +186,45 @@ export class MenuResolverService  {
     this.createStatisticsMenu();
     return this.waitForMenu$(MenuID.PUBLIC);
   }
-
   createStatisticsMenu() {
-    this.activatedRouteLastChild = this.getActivatedRoute(this.route);
-    observableCombineLatest([
-      this.getAuthorizedUsageStatistics(),
-      this.getAuthorizedLoginStatistics(),
-      this.getAuthorizedWorkflowStatistics(),
-    ]).pipe(take(1)).subscribe(([canViewUsage, canViewLogin, canViewWorkflow]) => {
-      const menuList = [];
-      if (canViewUsage || canViewLogin || canViewWorkflow) {
-        if (canViewUsage) {
-          menuList.push({
-            id: 'statistics_site',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.site',
-              link: '/statistics',
-            } as LinkMenuItemModel,
-          });
-        }
+    const menuList = [];
 
-        if (canViewLogin) {
-          menuList.push({
-            id: 'statistics_login',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.login',
-              link: '/statistics/login',
-            } as LinkMenuItemModel,
-          });
-        }
-
-        if (canViewWorkflow) {
-          menuList.push({
-            id: 'statistics_workflow',
-            parentID: 'statistics',
-            active: false,
-            visible: true,
-            model: {
-              type: MenuItemType.LINK,
-              text: 'menu.section.statistics.workflow',
-              link: '/statistics/workflow',
-            } as LinkMenuItemModel,
-          });
-        }
-
-        // the parent menu should be added after the children
-        menuList.push(
-          {
-            id: 'statistics',
-            active: false,
-            visible: true,
-            index: 1,
-            model: {
-              type: MenuItemType.TEXT,
-              text: 'menu.section.statistics',
-            } as TextMenuItemModel,
-          },
-        );
-      }
-      menuList.forEach((menuSection) => this.menuService.addSection(MenuID.PUBLIC, Object.assign(menuSection, {
-        shouldPersistOnRouteChange: true,
-      })));
+    // Public Statistics link
+    menuList.push({
+      id: 'statistics_site',
+      parentID: 'statistics',
+      active: false,
+      visible: true,
+      model: {
+        type: MenuItemType.LINK,
+        text: 'menu.section.statistics.site',
+        link: '/statistics',
+      } as LinkMenuItemModel,
     });
+
+    // Statistics menu
+    menuList.push({
+      id: 'statistics',
+      active: false,
+      visible: true,
+      index: 1,
+      model: {
+        type: MenuItemType.LINK,
+        text: 'menu.section.statistics',
+        link: '/statistics',
+      } as LinkMenuItemModel,
+    });
+
+    menuList.forEach((menuSection) =>
+      this.menuService.addSection(
+        MenuID.PUBLIC,
+        Object.assign(menuSection, {
+          shouldPersistOnRouteChange: true,
+        }),
+      ),
+    );
   }
+
   /**
    * Initialize all menu sections and items for {@link MenuID.ADMIN}
    */
